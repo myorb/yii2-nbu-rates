@@ -1,16 +1,16 @@
 <?php
-namespace microinginer\CbRFRates;
+namespace myorb\NBURates;
 
 use yii\base\Component;
 use yii\base\Exception;
 use yii\caching\DummyCache;
 
 /**
- * Class CBRF
+ * Class NBU
  * @author Ruslan Madatov <ruslanmadatov@yandex.ru>
- * @package microinginer\CbRFRates
+ * @package microinginer\NBURates
  */
-class CBRF extends Component
+class NBU extends Component
 {
     /**
      * @var string
@@ -23,7 +23,7 @@ class CBRF extends Component
     /**
      * @var string
      */
-    public $cachedId = 'CBRF_CACHE_das7878das8da8asd';
+    public $cachedId = 'NBU_CACHE_das7878das8da8asd';
     /**
      * @var int
      */
@@ -76,7 +76,7 @@ class CBRF extends Component
     public function init ()
     {
         if ($this->cached && empty(\Yii::$app->cache)) {
-            throw new CBRFException("Cache component not found! Please check your config file!");
+            throw new NBUException("Cache component not found! Please check your config file!");
         }
 
         $this->cache = (!empty(\Yii::$app->cache) ? \Yii::$app->cache : new DummyCache());
@@ -85,7 +85,7 @@ class CBRF extends Component
     /**
      * @param int $duration
      * @return $this
-     * @throws CBRFException
+     * @throws NBUException
      */
     public function cache ($duration = 3600)
     {
@@ -93,7 +93,7 @@ class CBRF extends Component
         $this->cacheDuration = $duration;
 
         if (empty(\Yii::$app->cache)) {
-            throw new CBRFException("Cache component not found! Please check your config file!");
+            throw new NBUException("Cache component not found! Please check your config file!");
         }
 
         return $this;
@@ -101,7 +101,7 @@ class CBRF extends Component
 
     /**
      * @return array
-     * @throws CBRFException
+     * @throws NBUException
      */
     public function all ()
     {
@@ -113,7 +113,7 @@ class CBRF extends Component
     /**
      * @param string $currency
      * @return array|mixed
-     * @throws CBRFException
+     * @throws NBUException
      */
     public function one ($currency = 'default')
     {
@@ -170,7 +170,7 @@ class CBRF extends Component
     /**
      * @param array $params
      * @return array
-     * @throws CBRFException
+     * @throws NBUException
      */
     public function dynamic (array $params)
     {
@@ -229,7 +229,7 @@ class CBRF extends Component
     }
 
     /**
-     * @throws CBRFException
+     * @throws NBUException
      */
     private function getRates ()
     {
@@ -237,7 +237,7 @@ class CBRF extends Component
 
         $xml = $this->getHttpRequest($urlWithParams);
 
-        if (!$xml) throw new CBRFException("Not correct XML");
+        if (!$xml) throw new NBUException("Not correct XML");
 
         foreach ($xml->Valute as $val) {
             $attr = $val->attributes();
@@ -264,7 +264,7 @@ class CBRF extends Component
             }
         }
 
-        if (empty($this->allCurrency)) throw new CBRFException('No loaded data');
+        if (empty($this->allCurrency)) throw new NBUException('No loaded data');
 
         if ($this->filterCurrency) {
             $this->allCurrency = array_intersect_key($this->allCurrency, $this->filterCurrency);
@@ -274,7 +274,7 @@ class CBRF extends Component
     /**
      * @param $url
      * @return \SimpleXMLElement
-     * @throws CBRFException
+     * @throws NBUException
      */
     private function getHttpRequest ($url)
     {
@@ -299,7 +299,7 @@ class CBRF extends Component
         $xml = simplexml_load_string($result);
 
         if (!$xml) {
-            throw new CBRFException("getHttpRequest is broken");
+            throw new NBUException("getHttpRequest is broken");
         }
 
         return $xml;
@@ -307,9 +307,9 @@ class CBRF extends Component
 }
 
 /**
- * Class CBRFException
+ * Class NBUException
  * @package app\components
  */
-class CBRFException extends Exception
+class NBUException extends Exception
 {
 }

@@ -1,7 +1,7 @@
 {
-    "name": "microinginer/yii2-cbrf-rates",
-    "keywords": ["yii2", "cbrf", "rates", "курсы", "валюты"],
-    "homepage": "https://github.com/microinginer/yii2-cbrf-rates",
+    "name": "myorb/yii2-nbu-rates",
+    "keywords": ["yii2", "nbu", "rates", "курсы", "валюты"],
+    "homepage": "https://github.com/myorb/yii2-nbu-rates",
     "type": "yii2-extensions",
     "require": {
         "yiisoft/yii2": "2.*"
@@ -9,14 +9,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "inginer",
-            "email": "ruslanmadatov@yandex.ru"
+            "name": "myorb",
+            "email": "itdep24@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "microinginer\\CbRFRates\\": "src/"
+            "myorb\\NBURates\\": "src/"
         }
     }
 }
