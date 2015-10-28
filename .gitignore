@@ -1,2 +1,11 @@
+<<<<<<< HEAD
 /.git/
 /vendor/
+=======
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+themes/classic/views/
+>>>>>>> f21879472b3f62301fab3bf484fe3e3ae9f1f7d6
